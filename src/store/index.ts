@@ -15,10 +15,12 @@ import { MMKV } from 'react-native-mmkv';
 
 import { api } from '../services/api';
 import theme from './theme';
+import findFalcone from './findFalcone';
 
 const reducers = combineReducers({
   theme,
   [api.reducerPath]: api.reducer,
+  findFalcone,
 });
 
 const storage = new MMKV();

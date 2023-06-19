@@ -4,45 +4,39 @@ import { useTheme } from '../../hooks';
 import { Brand } from '../../components';
 import { setDefaultTheme } from '../../store/theme';
 import { ApplicationScreenProps } from '../../../@types/navigation';
-import { useLazyFetchPlanetQuery } from 'finding_falcone_app/src/services/modules/planets';
-import { useLazyFetchVehicleQuery } from 'finding_falcone_app/src/services/modules/vehicles';
+import { useFetchPlanetQuery } from 'finding_falcone_app/src/services/modules/planets';
+import { useFetchVehicleQuery } from 'finding_falcone_app/src/services/modules/vehicles';
 import Lottie from 'lottie-react-native';
 const Startup = ({ navigation }: ApplicationScreenProps) => {
   const { Layout, Gutters } = useTheme();
 
-  const [
-    fetchPlanet,
-    {
-      isSuccess: isPlanetSuccess,
-      isLoading: isPlanetLoading,
-      isFetching: isPlanetFetching,
-    },
-  ] = useLazyFetchPlanetQuery();
+  const {
+    data: planetData,
+    error: planetsError,
+    isLoading: planetsLoading,
+  } = useFetchPlanetQuery({});
 
-  const [
-    fetchVehicle,
-    {
-      isSuccess: isVehicleSuccess,
-      isLoading: isVehicleLoading,
-      isFetching: isVehicleFetching,
-    },
-  ] = useLazyFetchVehicleQuery();
+  const {
+    data: vehicleData,
+    error: vehiclesError,
+    isLoading: vehiclesLoading,
+  } = useFetchVehicleQuery({});
 
-  const init = async () => {
-    //Initially loading the planet and vehicles
-    fetchPlanet({});
-    fetchVehicle({});
+  // const init = async () => {
+  //   //Initially loading the planet and vehicles
+  //   fetchPlanet({});
+  //   fetchVehicle({});
 
-    await setDefaultTheme({ theme: 'default', darkMode: null });
-  };
+  //   await setDefaultTheme({ theme: 'default', darkMode: null });
+  // };
 
-  useEffect(() => {
-    init();
-  }, []);
+  // useEffect(() => {
+  //   init();
+  // }, []);
 
   useEffect(() => {
     // Navigating to main page from Splash Screen
-    if (isPlanetSuccess && isVehicleSuccess) {
+    if (planetData && vehicleData) {
       navigation.reset({
         index: 0,
         routes: [{ name: 'Main' }],
@@ -51,7 +45,7 @@ const Startup = ({ navigation }: ApplicationScreenProps) => {
     //TODO: Handle failure
 
     return () => {};
-  }, [isPlanetSuccess, isVehicleSuccess]);
+  }, [vehicleData, planetData]);
 
   return (
     <View style={[Layout.fill, Layout.colCenter]}>

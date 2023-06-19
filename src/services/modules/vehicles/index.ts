@@ -2,7 +2,9 @@ import { api } from '../../api';
 
 export type Vehicle = {
   name: string;
-  distance: number;
+  total_no: number;
+  max_distance: number;
+  speed: number;
 };
 
 export const vehicleApi = api.injectEndpoints({
@@ -14,4 +16,4 @@ export const vehicleApi = api.injectEndpoints({
   }),
 });
 
-export const { useLazyFetchVehicleQuery } = vehicleApi;
+export const { useFetchVehicleQuery } = vehicleApi;

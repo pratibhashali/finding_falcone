@@ -14,4 +14,4 @@ export const planetApi = api.injectEndpoints({
   }),
 });
 
-export const { useLazyFetchPlanetQuery } = planetApi;
+export const { useFetchPlanetQuery } = planetApi;

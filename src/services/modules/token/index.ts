@@ -6,11 +6,18 @@ export type Token = {
 
 export const userApi = api.injectEndpoints({
   endpoints: build => ({
-    fetchToken: build.query<Token, {}>({
-      query: () => 'token',
+    fetchToken: build.mutation<Token, {}>({
+      query: () => ({
+        url: 'token',
+        method: 'POST',
+        body: {},
+        headers: {
+          Accept: 'application/json',
+        },
+      }),
     }),
   }),
   overrideExisting: false,
 });
 
-export const { useLazyFetchTokenQuery } = userApi;
+export const { useFetchTokenMutation } = userApi;
