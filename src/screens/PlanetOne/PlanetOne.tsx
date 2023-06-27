@@ -5,6 +5,7 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  Button,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../hooks';
@@ -22,6 +23,7 @@ import RadioButton, {
   RadioButtonOption,
 } from 'finding_falcone_app/src/components/RadioButton/RadioButton';
 import { useFetchTokenMutation } from 'finding_falcone_app/src/services/modules/token';
+import { useFindMutation } from 'finding_falcone_app/src/services/modules/find';
 
 const Example = () => {
   const { t } = useTranslation(['example', 'welcome']);
@@ -48,9 +50,13 @@ const Example = () => {
   } = useFetchVehicleQuery({});
 
   const [fetchToken, { isLoading }] = useFetchTokenMutation({});
+  const [find, {}] = useFindMutation();
+  const [pods, setPods] = useState<(string | null)[]>([null, null, null, null]);
+  const [token, setToken] = useState<string>('');
   const init = async () => {
     try {
-      const token = await fetchToken({}).unwrap();
+      const tokenr = await fetchToken({}).unwrap();
+      setToken(tokenr.token.toString());
       console.log('🚀 ~ file: PlanetOne.tsx:55 ~ init ~ token:', token);
     } catch (error) {
       console.log('🚀 ~ file: PlanetOne.tsx:56 ~ init ~ error:', error);
@@ -130,6 +136,20 @@ const Example = () => {
     setSelectedOption4(option);
   };
 
+  const onSubmit = () => {
+    const payload = {
+      token: token,
+      planet_names: planets,
+      vehicle_names: [
+        selectedOption1?.name,
+        selectedOption2?.name,
+        selectedOption3?.name,
+        selectedOption4?.name,
+      ],
+    };
+    find(payload);
+  };
+
   return (
     <ScrollView
       style={[Layout.fill, { backgroundColor: 'white' }]}
@@ -204,6 +224,8 @@ const Example = () => {
                 onSelectOption={handleSelectOption4}
               />
             )}
+
+            <Button title="Submit" onPress={onSubmit} />
           </>
         ) : (
           <ActivityIndicator />
