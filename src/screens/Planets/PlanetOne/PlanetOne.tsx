@@ -32,6 +32,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'finding_falcone_app/src/store';
 import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndButton';
+import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 // import { useAppDispatch } from 'finding_falcone_app/src/store';
 
 const Example = ({ navigation }) => {
@@ -56,6 +57,9 @@ const Example = ({ navigation }) => {
     },
     [dispatch, vehicle1Selected],
   );
+
+  const onReset = () => navigation.navigate(Routes.WELCOME);
+  const onNext = () => navigation.navigate(Routes.PLANET_TWO);
 
   return (
     <ScrollView
@@ -98,8 +102,8 @@ const Example = ({ navigation }) => {
 
             <TimeAndButton
               disabled={!(spaceShip1 && planet1)}
-              onReset={() => navigation.navigate('Welcome')}
-              onSubmit={() => navigation.navigate('SelectPlanetTwo')}
+              onReset={onReset}
+              onSubmit={onNext}
               timeTaken={timeTaken}
               buttonText="Select next planet"
             />

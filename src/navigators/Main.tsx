@@ -4,11 +4,15 @@ import { PlanetFour, PlanetOne, PlanetThree, PlanetTwo } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import Welcome from '../screens/Welcome/Welcome';
 import FindFalconeResult from '../screens/Resulit/FindFalconeResult';
+import { Routes } from './Routes';
 
 const Stack = createStackNavigator();
 
 const headerRight = () => (
-  <Text onPress={() => Linking.openURL('https://www.geektrust.com/')}>
+  <Text
+    style={{ paddingEnd: 5 }}
+    onPress={() => Linking.openURL('https://www.geektrust.com/')}
+  >
     GeekTrust
   </Text>
 );
@@ -22,29 +26,33 @@ const MainNavigator = () => {
         headerRight: headerRight,
       }}
     >
-      <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen
-        name="Home"
+        name={Routes.WELCOME}
+        component={Welcome}
+        options={{ title: 'Welcome' }}
+      />
+      <Stack.Screen
+        name={Routes.HOME}
         component={PlanetOne}
         options={{ title: 'Finding Falcone!' }}
       />
       <Stack.Screen
-        name="SelectPlanetTwo"
+        name={Routes.PLANET_TWO}
         component={PlanetTwo}
         options={{ title: 'Finding Falcone!' }}
       />
       <Stack.Screen
-        name="SelectPlanetThree"
+        name={Routes.PLANET_THREE}
         component={PlanetThree}
         options={{ title: 'Finding Falcone!' }}
       />
       <Stack.Screen
-        name="SelectPlanetFour"
+        name={Routes.PLANET_FOUR}
         component={PlanetFour}
         options={{ title: 'Finding Falcone!' }}
       />
       <Stack.Screen
-        name="Result"
+        name={Routes.RESULT}
         component={FindFalconeResult}
         options={{ title: 'Finding Falcone!' }}
       />

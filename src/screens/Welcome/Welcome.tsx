@@ -5,13 +5,14 @@ import { useTheme } from 'finding_falcone_app/src/hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { resetFindFalcone } from 'finding_falcone_app/src/store/findFalcone';
+import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 const Welcome = ({ navigation }) => {
   const { Layout } = useTheme();
   const dispatch = useDispatch();
   const onStartPress = () => {
     //Clear all the previous state
     dispatch(resetFindFalcone());
-    navigation.push('Home');
+    navigation.push(Routes.HOME);
   };
   return (
     <View style={[Layout.fill]}>

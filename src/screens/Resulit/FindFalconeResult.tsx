@@ -1,20 +1,27 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import { useFindMutation } from 'finding_falcone_app/src/services/modules/find';
 import { useSelector } from 'react-redux';
 import { RootState } from 'finding_falcone_app/src/store';
 import TimeTaken from 'finding_falcone_app/src/components/Time/TimeTaken';
 import { useTheme } from 'finding_falcone_app/src/hooks';
+import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 
 const FindFalconeResult = ({ navigation }) => {
-  const [, { data }] = useFindMutation({
+  const [, { data, isLoading }] = useFindMutation({
     fixedCacheKey: 'shared-find-falcone',
   });
 
   const { timeTaken } = useSelector((state: RootState) => state.findFalcone);
   const { Layout, Gutters } = useTheme();
 
-  const onReset = () => navigation.navigate('Welcome');
+  const onReset = () => navigation.navigate(Routes.WELCOME);
 
   const successView = () => (
     <>
@@ -54,7 +61,7 @@ const FindFalconeResult = ({ navigation }) => {
   };
   return (
     <View style={[Layout.fill, Gutters.smallPadding, styles.root]}>
-      {getResultView()}
+      {!isLoading ? getResultView() : <ActivityIndicator size="large" />}
     </View>
   );
 };

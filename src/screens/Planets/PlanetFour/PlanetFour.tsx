@@ -17,6 +17,7 @@ import { useFindMutation } from 'finding_falcone_app/src/services/modules/find';
 import { useTheme } from 'finding_falcone_app/src/hooks';
 import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndButton';
 import { useFetchTokenMutation } from 'finding_falcone_app/src/services/modules/token';
+import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 
 const PlanetFour = ({ navigation }) => {
   const { Layout, Gutters } = useTheme();
@@ -51,7 +52,7 @@ const PlanetFour = ({ navigation }) => {
     },
     [dispatch, vehicle4Selected],
   );
-
+  const onReset = () => navigation.navigate(Routes.WELCOME);
   const onSubmit = async () => {
     try {
       const token = await fetchToken({}).unwrap();
@@ -71,7 +72,7 @@ const PlanetFour = ({ navigation }) => {
         ],
       };
       find(payload);
-      navigation.navigate('Result');
+      navigation.navigate(Routes.RESULT);
     } catch (error) {}
   };
 
@@ -104,7 +105,7 @@ const PlanetFour = ({ navigation }) => {
         )}
         <TimeAndButton
           disabled={!(spaceShip4 && planet4)}
-          onReset={() => navigation.navigate('Welcome')}
+          onReset={onReset}
           onSubmit={onSubmit}
           timeTaken={timeTaken}
           buttonText="Find Al Falcone"

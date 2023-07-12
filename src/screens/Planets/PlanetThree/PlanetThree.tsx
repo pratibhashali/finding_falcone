@@ -15,6 +15,7 @@ import {
 } from 'finding_falcone_app/src/services/modules/vehicles';
 import { useTheme } from 'finding_falcone_app/src/hooks';
 import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndButton';
+import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 
 const PlanetThree = ({ navigation }) => {
   const { Layout, Gutters } = useTheme();
@@ -35,6 +36,9 @@ const PlanetThree = ({ navigation }) => {
     },
     [dispatch, vehicle3Selected],
   );
+
+  const onReset = () => navigation.navigate(Routes.WELCOME);
+  const onNext = () => navigation.navigate(Routes.PLANET_FOUR);
 
   return (
     <View style={[Layout.fill, Gutters.smallPadding, styles.viewBg]}>
@@ -66,8 +70,8 @@ const PlanetThree = ({ navigation }) => {
 
         <TimeAndButton
           disabled={!(spaceShip3 && planet3)}
-          onReset={() => navigation.navigate('Welcome')}
-          onSubmit={() => navigation.navigate('SelectPlanetFour')}
+          onReset={onReset}
+          onSubmit={onNext}
           timeTaken={timeTaken}
           buttonText="Select next planet"
         />
