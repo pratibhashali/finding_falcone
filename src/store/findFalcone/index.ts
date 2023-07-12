@@ -99,6 +99,7 @@ const findFalconeSlice = createSlice({
     },
     planet4Selected: (state, action: PayloadAction<Planet>) => {
       state.planet4 = action.payload;
+      state.spaceShip4 = undefined;
     },
 
     vehicle1Selected: (state, action: PayloadAction<Vehicle>) => {
