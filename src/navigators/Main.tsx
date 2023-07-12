@@ -16,7 +16,6 @@ const MainNavigator = () => {
       screenOptions={{
         headerShown: true,
         presentation: 'card',
-        headerRight: headerRight,
       }}
     >
       <Stack.Screen
@@ -27,27 +26,27 @@ const MainNavigator = () => {
       <Stack.Screen
         name={Routes.HOME}
         component={PlanetOne}
-        options={{ title: 'Finding Falcone!' }}
+        options={{ title: 'Finding Falcone!', headerRight: headerRight }}
       />
       <Stack.Screen
         name={Routes.PLANET_TWO}
         component={PlanetTwo}
-        options={{ title: 'Finding Falcone!' }}
+        options={{ title: 'Finding Falcone!', headerRight: headerRight }}
       />
       <Stack.Screen
         name={Routes.PLANET_THREE}
         component={PlanetThree}
-        options={{ title: 'Finding Falcone!' }}
+        options={{ title: 'Finding Falcone!', headerRight: headerRight }}
       />
       <Stack.Screen
         name={Routes.PLANET_FOUR}
         component={PlanetFour}
-        options={{ title: 'Finding Falcone!' }}
+        options={{ title: 'Finding Falcone!', headerRight: headerRight }}
       />
       <Stack.Screen
         name={Routes.RESULT}
         component={FindFalconeResult}
-        options={{ title: 'Finding Falcone!' }}
+        options={{ title: 'Finding Falcone!', headerRight: headerRight }}
       />
     </Stack.Navigator>
   );
