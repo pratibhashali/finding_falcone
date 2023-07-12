@@ -16,6 +16,7 @@ import { MMKV } from 'react-native-mmkv';
 import { api } from '../services/api';
 import theme from './theme';
 import findFalcone from './findFalcone';
+import { useDispatch } from 'react-redux';
 
 const reducers = combineReducers({
   theme,
@@ -64,6 +65,11 @@ const store = configureStore({
     return middlewares;
   },
 });
+
+export type RootState = ReturnType<typeof persistedReducer>;
+
+// export type AppDispatch = typeof store.dispatch;
+// export const useAppDispatch: () => AppDispatch = useDispatch;
 
 const persistor = persistStore(store);
 

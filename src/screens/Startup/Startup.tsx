@@ -7,6 +7,8 @@ import { ApplicationScreenProps } from '../../../@types/navigation';
 import { useFetchPlanetQuery } from 'finding_falcone_app/src/services/modules/planets';
 import { useFetchVehicleQuery } from 'finding_falcone_app/src/services/modules/vehicles';
 import Lottie from 'lottie-react-native';
+import { useDispatch } from 'react-redux';
+import { selectPlanetOneDropDownData } from 'finding_falcone_app/src/store/findFalcone';
 const Startup = ({ navigation }: ApplicationScreenProps) => {
   const { Layout, Gutters } = useTheme();
 
@@ -22,21 +24,12 @@ const Startup = ({ navigation }: ApplicationScreenProps) => {
     isLoading: vehiclesLoading,
   } = useFetchVehicleQuery({});
 
-  // const init = async () => {
-  //   //Initially loading the planet and vehicles
-  //   fetchPlanet({});
-  //   fetchVehicle({});
-
-  //   await setDefaultTheme({ theme: 'default', darkMode: null });
-  // };
-
-  // useEffect(() => {
-  //   init();
-  // }, []);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Navigating to main page from Splash Screen
     if (planetData && vehicleData) {
+      dispatch(selectPlanetOneDropDownData(planetData));
       navigation.reset({
         index: 0,
         routes: [{ name: 'Main' }],

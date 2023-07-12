@@ -1,6 +1,7 @@
+import { Planet } from 'finding_falcone_app/src/services/modules/planets';
 import { Vehicle } from 'finding_falcone_app/src/services/modules/vehicles';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export type RadioButtonOption = {
   name: string;
@@ -11,44 +12,49 @@ interface RadioButtonProps {
   // eslint-disable-next-line react/require-default-props
   selectedOption?: Vehicle;
   onSelectOption: (option: Vehicle) => void;
+  selectedPlanet: Planet;
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({
   options,
   selectedOption,
   onSelectOption,
+  selectedPlanet,
 }) => {
+  const checkEligibility = (planet: Planet, vehicle: Vehicle) => {
+    return vehicle.max_distance < planet.distance;
+  };
   return (
     <View>
       {options.map(option => (
         <TouchableOpacity
           key={option.name}
-          style={{ flexDirection: 'row', alignItems: 'center' }}
+          style={styles.touchableOpacity}
           onPress={() => onSelectOption(option)}
+          disabled={checkEligibility(selectedPlanet, option)}
         >
           <View
-            style={{
-              width: 20,
-              height: 20,
-              borderRadius: 10,
-              borderWidth: 2,
-              borderColor: selectedOption === option ? 'blue' : 'gray',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            style={[
+              styles.rootView,
+              { borderColor: selectedOption === option ? 'blue' : 'gray' },
+            ]}
           >
             {selectedOption?.name === option.name && (
-              <View
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: 6,
-                  backgroundColor: 'blue',
-                }}
-              />
+              <View style={[styles.selected]} />
             )}
           </View>
-          <Text style={{ marginLeft: 8 }}>{option.name}</Text>
+          <Text
+            style={[
+              styles.spaceLeft,
+              {
+                color: !checkEligibility(selectedPlanet, option)
+                  ? 'black'
+                  : 'grey',
+              },
+            ]}
+          >
+            {option.name}
+          </Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -56,3 +62,26 @@ const RadioButton: React.FC<RadioButtonProps> = ({
 };
 
 export default RadioButton;
+
+const styles = StyleSheet.create({
+  touchableOpacity: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  rootView: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selected: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: 'blue',
+  },
+  spaceLeft: { marginLeft: 10 },
+});

@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Planet } from 'finding_falcone_app/src/services/modules/planets';
+import { Vehicle } from 'finding_falcone_app/src/services/modules/vehicles';
 
 export type FindFalcone = {
   token: string;
-  planet_names: string[];
+  planet_names: (string | undefined)[];
   vehicle_names: string[];
 };
 
@@ -26,43 +28,149 @@ const initialState: FindFalconeState = {
     planet_name: '',
     error: undefined,
   },
+  token: '',
+  planet1: undefined,
+  planet2: undefined,
+  planet3: undefined,
+  planet4: undefined,
+  spaceShip1: undefined,
+  spaceShip2: undefined,
+  spaceShip3: undefined,
+  spaceShip4: undefined,
+  selectPlanetOneDropDownData: [],
+  selectPlanetTwoDropDownData: [],
+  selectPlanetThreeDropDownData: [],
+  selectPlanetFourDropDownData: [],
+  timeTaken: 0,
 };
 
 const findFalconeSlice = createSlice({
   name: 'findFalcone',
   initialState: initialState,
   reducers: {
-    planetSelected: (state, { payload: { planet } }: PlanetPayload) => {
-      state.findFalcone.planet_names.push(planet);
+    planet1Selected: (state, action: PayloadAction<Planet>) => {
+      state.planet1 = action.payload;
+      state.planet2 = undefined;
+      state.planet3 = undefined;
+      state.planet4 = undefined;
+      // Removing the selected planet from second page dropdown
+      state.selectPlanetTwoDropDownData =
+        state.selectPlanetOneDropDownData.filter(
+          planet => planet.name !== action.payload.name,
+        );
+      //Removing selected spaceships as well as planet is modified
+      state.spaceShip1 = undefined;
+      state.spaceShip2 = undefined;
+      state.spaceShip3 = undefined;
+      state.spaceShip4 = undefined;
     },
-    vehicleSelected: (state, { payload: { vehicle } }: VehiclePayload) => {
-      state.findFalcone.vehicle_names.push(vehicle);
+    planet2Selected: (state, action: PayloadAction<Planet>) => {
+      state.planet2 = action.payload;
+      state.planet3 = undefined;
+      state.planet4 = undefined;
+      // Removing the selected planet from third page dropdown
+      state.selectPlanetThreeDropDownData =
+        state.selectPlanetTwoDropDownData.filter(
+          planet => planet.name !== action.payload.name,
+        );
+      //Removing selected spaceships as well as planet is modified
+      state.spaceShip2 = undefined;
+      state.spaceShip3 = undefined;
+      state.spaceShip4 = undefined;
     },
+    planet3Selected: (state, action: PayloadAction<Planet>) => {
+      state.planet3 = action.payload;
+      state.planet4 = undefined;
+      // Removing the selected planet from fourth page dropdown
+      state.selectPlanetFourDropDownData =
+        state.selectPlanetThreeDropDownData.filter(
+          planet => planet.name !== action.payload.name,
+        );
+      //Removing selected spaceships as well as planet is modified
+      state.spaceShip3 = undefined;
+      state.spaceShip4 = undefined;
+    },
+    planet4Selected: (state, action: PayloadAction<Planet>) => {
+      state.planet4 = action.payload;
+    },
+
+    vehicle1Selected: (state, action: PayloadAction<Vehicle>) => {
+      state.spaceShip1 = action.payload;
+      state.timeTaken = (state.planet1?.distance ?? 0) / action.payload.speed;
+    },
+    vehicle2Selected: (state, action: PayloadAction<Vehicle>) => {
+      state.spaceShip2 = action.payload;
+      state.timeTaken =
+        (state.planet2?.distance ?? 0) / action.payload.speed + state.timeTaken;
+    },
+    vehicle3Selected: (state, action: PayloadAction<Vehicle>) => {
+      state.spaceShip3 = action.payload;
+      state.timeTaken =
+        (state.planet3?.distance ?? 0) / action.payload.speed + state.timeTaken;
+    },
+    vehicle4Selected: (state, action: PayloadAction<Vehicle>) => {
+      state.spaceShip4 = action.payload;
+      state.timeTaken =
+        (state.planet4?.distance ?? 0) / action.payload.speed + state.timeTaken;
+    },
+    selectPlanetOneDropDownData: (state, action: PayloadAction<Planet[]>) => {
+      state.selectPlanetOneDropDownData = action.payload;
+    },
+
     resetFindFalcone: state => {
-      state.findFalcone = initialState.findFalcone;
-      state.findFalconeResponse = initialState.findFalconeResponse;
+      state.spaceShip1 = undefined;
+      state.spaceShip2 = undefined;
+      state.spaceShip3 = undefined;
+      state.spaceShip4 = undefined;
+      state.planet1 = undefined;
+      state.planet2 = undefined;
+      state.planet3 = undefined;
+      state.planet4 = undefined;
+      state.timeTaken = 0;
+    },
+    setToken: (state, { payload: { token } }: TokenPayload) => {
+      state.token = token;
     },
   },
 });
 
-export const { planetSelected, vehicleSelected, resetFindFalcone } =
-  findFalconeSlice.actions;
+export const {
+  planet1Selected,
+  vehicle1Selected,
+  planet2Selected,
+  vehicle2Selected,
+  planet3Selected,
+  vehicle3Selected,
+  planet4Selected,
+  vehicle4Selected,
+  resetFindFalcone,
+  setToken,
+  selectPlanetOneDropDownData,
+} = findFalconeSlice.actions;
 
 export default findFalconeSlice.reducer;
 
 export type FindFalconeState = {
   findFalcone: FindFalcone;
   findFalconeResponse?: FindFalconeResponse;
+  token?: string;
+  planet1?: Planet;
+  planet2?: Planet;
+  planet3?: Planet;
+  planet4?: Planet;
+  spaceShip1?: Vehicle;
+  spaceShip2?: Vehicle;
+  spaceShip3?: Vehicle;
+  spaceShip4?: Vehicle;
+  selectPlanetOneDropDownData: Planet[];
+  selectPlanetTwoDropDownData: Planet[];
+  selectPlanetThreeDropDownData: Planet[];
+  selectPlanetFourDropDownData: Planet[];
+  timeTaken: number;
 };
 
-type PlanetPayload = {
+type TokenPayload = {
   payload: {
-    planet: string;
-  };
-};
-
-type VehiclePayload = {
-  payload: {
-    vehicle: string;
+    token: string;
   };
 };
