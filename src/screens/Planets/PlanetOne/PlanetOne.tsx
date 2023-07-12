@@ -31,8 +31,13 @@ const Example = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  const { planet1, spaceShip1, selectPlanetOneDropDownData, timeTaken1 } =
-    useSelector((state: RootState) => state.findFalcone);
+  const {
+    planet1,
+    spaceShip1,
+    selectPlanetOneDropDownData,
+    timeTaken1,
+    vehicleCountMapper1,
+  } = useSelector((state: RootState) => state.findFalcone);
   const onDestination1Selected = useCallback(
     (item: Planet) => {
       dispatch(planet1Selected(item));
@@ -81,6 +86,7 @@ const Example = ({ navigation }) => {
                   Select the space vehicle you want to use:
                 </Text>
                 <RadioButton
+                  vehicleCountMapper={vehicleCountMapper1}
                   selectedPlanet={planet1}
                   options={vehicleData!}
                   selectedOption={spaceShip1}

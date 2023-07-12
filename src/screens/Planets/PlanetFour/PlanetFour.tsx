@@ -38,6 +38,7 @@ const PlanetFour = ({ navigation }) => {
     spaceShip2,
     planet3,
     spaceShip3,
+    vehicleCountMapper4,
   } = useSelector((state: RootState) => state.findFalcone);
   const onDestination4Selected = useCallback(
     (item: Planet) => {
@@ -96,6 +97,7 @@ const PlanetFour = ({ navigation }) => {
               Select the space vehicle you want to use:
             </Text>
             <RadioButton
+              vehicleCountMapper={vehicleCountMapper4}
               selectedPlanet={planet4}
               options={vehicleData!}
               selectedOption={spaceShip4}

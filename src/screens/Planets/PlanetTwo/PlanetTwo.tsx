@@ -21,8 +21,13 @@ const PlanetTwo = ({ navigation }) => {
   const { Layout, Gutters } = useTheme();
   const { data: vehicleData } = useFetchVehicleQuery({});
   const dispatch = useDispatch();
-  const { timeTaken2, planet2, spaceShip2, selectPlanetTwoDropDownData } =
-    useSelector((state: RootState) => state.findFalcone);
+  const {
+    timeTaken2,
+    planet2,
+    spaceShip2,
+    selectPlanetTwoDropDownData,
+    vehicleCountMapper2,
+  } = useSelector((state: RootState) => state.findFalcone);
   const onDestination2Selected = useCallback(
     (item: Planet) => {
       dispatch(planet2Selected(item));
@@ -59,6 +64,7 @@ const PlanetTwo = ({ navigation }) => {
               Select the space vehicle you want to use:
             </Text>
             <RadioButton
+              vehicleCountMapper={vehicleCountMapper2}
               selectedPlanet={planet2}
               options={vehicleData!}
               selectedOption={spaceShip2}

@@ -13,6 +13,7 @@ interface RadioButtonProps {
   selectedOption?: Vehicle;
   onSelectOption: (option: Vehicle) => void;
   selectedPlanet: Planet;
+  vehicleCountMapper: any;
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({
@@ -20,9 +21,13 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   selectedOption,
   onSelectOption,
   selectedPlanet,
+  vehicleCountMapper,
 }) => {
   const checkEligibility = (planet: Planet, vehicle: Vehicle) => {
-    return vehicle.max_distance < planet.distance;
+    return (
+      vehicle.max_distance < planet.distance ||
+      vehicleCountMapper[vehicle.name] === 0
+    );
   };
   return (
     <View>
@@ -53,7 +58,13 @@ const RadioButton: React.FC<RadioButtonProps> = ({
               },
             ]}
           >
-            {option.name}
+            {option.name} (
+            {selectedOption && selectedOption.name === option.name
+              ? vehicleCountMapper[selectedOption.name] - 1 < 0
+                ? 0
+                : vehicleCountMapper[selectedOption.name] - 1
+              : vehicleCountMapper[option.name]}
+            )
           </Text>
         </TouchableOpacity>
       ))}

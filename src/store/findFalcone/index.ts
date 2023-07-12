@@ -45,6 +45,10 @@ const initialState: FindFalconeState = {
   timeTaken2: 0,
   timeTaken3: 0,
   timeTaken4: 0,
+  vehicleCountMapper1: {},
+  vehicleCountMapper2: {},
+  vehicleCountMapper3: {},
+  vehicleCountMapper4: {},
 };
 
 const findFalconeSlice = createSlice({
@@ -105,6 +109,11 @@ const findFalconeSlice = createSlice({
       state.planet2 = undefined;
       state.planet3 = undefined;
       state.planet4 = undefined;
+
+      // Updating remaining vehicle count
+      const vehicleCountMapper2 = { ...state.vehicleCountMapper1 };
+      vehicleCountMapper2[action.payload.name] -= 1;
+      state.vehicleCountMapper2 = vehicleCountMapper2;
     },
     vehicle2Selected: (state, action: PayloadAction<Vehicle>) => {
       state.spaceShip2 = action.payload;
@@ -115,6 +124,11 @@ const findFalconeSlice = createSlice({
       state.timeTaken3 = timeTaken2;
       state.planet3 = undefined;
       state.planet4 = undefined;
+
+      // Updating remaining vehicle count
+      const vehicleCountMapper3 = { ...state.vehicleCountMapper2 };
+      vehicleCountMapper3[action.payload.name] -= 1;
+      state.vehicleCountMapper3 = vehicleCountMapper3;
     },
     vehicle3Selected: (state, action: PayloadAction<Vehicle>) => {
       state.spaceShip3 = action.payload;
@@ -125,6 +139,10 @@ const findFalconeSlice = createSlice({
       state.timeTaken3 = timeTaken3;
       state.timeTaken4 = timeTaken3;
       state.planet4 = undefined;
+      // Updating remaining vehicle count
+      const vehicleCountMapper4 = { ...state.vehicleCountMapper3 };
+      vehicleCountMapper4[action.payload.name] -= 1;
+      state.vehicleCountMapper4 = vehicleCountMapper4;
     },
     vehicle4Selected: (state, action: PayloadAction<Vehicle>) => {
       state.spaceShip4 = action.payload;
@@ -151,9 +169,19 @@ const findFalconeSlice = createSlice({
       state.timeTaken2 = 0;
       state.timeTaken3 = 0;
       state.timeTaken4 = 0;
+      state.vehicleCountMapper2 = {};
+      state.vehicleCountMapper3 = {};
+      state.vehicleCountMapper4 = {};
     },
     setToken: (state, { payload: { token } }: TokenPayload) => {
       state.token = token;
+    },
+
+    setVehicleMap: (state, action: PayloadAction<Vehicle[]>) => {
+      state.vehicleCountMapper1 = action.payload.reduce((object: any, item) => {
+        object[item.name] = item.total_no;
+        return object;
+      }, {});
     },
   },
 });
@@ -170,6 +198,7 @@ export const {
   resetFindFalcone,
   setToken,
   selectPlanetOneDropDownData,
+  setVehicleMap,
 } = findFalconeSlice.actions;
 
 export default findFalconeSlice.reducer;
@@ -194,6 +223,10 @@ export type FindFalconeState = {
   timeTaken2: number;
   timeTaken3: number;
   timeTaken4: number;
+  vehicleCountMapper1?: any;
+  vehicleCountMapper2?: any;
+  vehicleCountMapper3?: any;
+  vehicleCountMapper4?: any;
 };
 
 type TokenPayload = {
