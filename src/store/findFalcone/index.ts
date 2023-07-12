@@ -41,7 +41,10 @@ const initialState: FindFalconeState = {
   selectPlanetTwoDropDownData: [],
   selectPlanetThreeDropDownData: [],
   selectPlanetFourDropDownData: [],
-  timeTaken: 0,
+  timeTaken1: 0,
+  timeTaken2: 0,
+  timeTaken3: 0,
+  timeTaken4: 0,
 };
 
 const findFalconeSlice = createSlice({
@@ -96,22 +99,40 @@ const findFalconeSlice = createSlice({
 
     vehicle1Selected: (state, action: PayloadAction<Vehicle>) => {
       state.spaceShip1 = action.payload;
-      state.timeTaken = (state.planet1?.distance ?? 0) / action.payload.speed;
+      const timeTaken = (state.planet1?.distance ?? 0) / action.payload.speed;
+      state.timeTaken1 = timeTaken;
+      state.timeTaken2 = timeTaken;
+      state.planet2 = undefined;
+      state.planet3 = undefined;
+      state.planet4 = undefined;
     },
     vehicle2Selected: (state, action: PayloadAction<Vehicle>) => {
       state.spaceShip2 = action.payload;
-      state.timeTaken =
-        (state.planet2?.distance ?? 0) / action.payload.speed + state.timeTaken;
+      const timeTaken2 =
+        (state.planet2?.distance ?? 0) / action.payload.speed +
+        state.timeTaken1;
+      state.timeTaken2 = timeTaken2;
+      state.timeTaken3 = timeTaken2;
+      state.planet3 = undefined;
+      state.planet4 = undefined;
     },
     vehicle3Selected: (state, action: PayloadAction<Vehicle>) => {
       state.spaceShip3 = action.payload;
-      state.timeTaken =
-        (state.planet3?.distance ?? 0) / action.payload.speed + state.timeTaken;
+      const timeTaken3 =
+        (state.planet3?.distance ?? 0) / action.payload.speed +
+        state.timeTaken2 +
+        state.timeTaken1;
+      state.timeTaken3 = timeTaken3;
+      state.timeTaken4 = timeTaken3;
+      state.planet4 = undefined;
     },
     vehicle4Selected: (state, action: PayloadAction<Vehicle>) => {
       state.spaceShip4 = action.payload;
-      state.timeTaken =
-        (state.planet4?.distance ?? 0) / action.payload.speed + state.timeTaken;
+      state.timeTaken4 =
+        (state.planet4?.distance ?? 0) / action.payload.speed +
+        state.timeTaken3 +
+        state.timeTaken2 +
+        state.timeTaken1;
     },
     selectPlanetOneDropDownData: (state, action: PayloadAction<Planet[]>) => {
       state.selectPlanetOneDropDownData = action.payload;
@@ -126,7 +147,10 @@ const findFalconeSlice = createSlice({
       state.planet2 = undefined;
       state.planet3 = undefined;
       state.planet4 = undefined;
-      state.timeTaken = 0;
+      state.timeTaken1 = 0;
+      state.timeTaken2 = 0;
+      state.timeTaken3 = 0;
+      state.timeTaken4 = 0;
     },
     setToken: (state, { payload: { token } }: TokenPayload) => {
       state.token = token;
@@ -166,7 +190,10 @@ export type FindFalconeState = {
   selectPlanetTwoDropDownData: Planet[];
   selectPlanetThreeDropDownData: Planet[];
   selectPlanetFourDropDownData: Planet[];
-  timeTaken: number;
+  timeTaken1: number;
+  timeTaken2: number;
+  timeTaken3: number;
+  timeTaken4: number;
 };
 
 type TokenPayload = {

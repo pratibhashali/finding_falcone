@@ -21,7 +21,7 @@ const PlanetThree = ({ navigation }) => {
   const { Layout, Gutters } = useTheme();
   const { data: vehicleData } = useFetchVehicleQuery({});
   const dispatch = useDispatch();
-  const { timeTaken, planet3, spaceShip3, selectPlanetThreeDropDownData } =
+  const { timeTaken3, planet3, spaceShip3, selectPlanetThreeDropDownData } =
     useSelector((state: RootState) => state.findFalcone);
   const onDestination3Selected = useCallback(
     (item: Planet) => {
@@ -72,7 +72,7 @@ const PlanetThree = ({ navigation }) => {
           disabled={!(spaceShip3 && planet3)}
           onReset={onReset}
           onSubmit={onNext}
-          timeTaken={timeTaken}
+          timeTaken={timeTaken3}
           buttonText="Select next planet"
         />
       </>

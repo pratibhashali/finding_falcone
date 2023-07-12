@@ -31,7 +31,7 @@ const Example = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  const { planet1, spaceShip1, selectPlanetOneDropDownData, timeTaken } =
+  const { planet1, spaceShip1, selectPlanetOneDropDownData, timeTaken1 } =
     useSelector((state: RootState) => state.findFalcone);
   const onDestination1Selected = useCallback(
     (item: Planet) => {
@@ -93,7 +93,7 @@ const Example = ({ navigation }) => {
               disabled={!(spaceShip1 && planet1)}
               onReset={onReset}
               onSubmit={onNext}
-              timeTaken={timeTaken}
+              timeTaken={timeTaken1}
               buttonText="Select next planet"
             />
           </>

@@ -28,7 +28,7 @@ const PlanetFour = ({ navigation }) => {
   const { data: vehicleData } = useFetchVehicleQuery({});
   const dispatch = useDispatch();
   const {
-    timeTaken,
+    timeTaken4,
     planet4,
     spaceShip4,
     selectPlanetFourDropDownData,
@@ -107,7 +107,7 @@ const PlanetFour = ({ navigation }) => {
           disabled={!(spaceShip4 && planet4)}
           onReset={onReset}
           onSubmit={onSubmit}
-          timeTaken={timeTaken}
+          timeTaken={timeTaken4}
           buttonText="Find Al Falcone"
         />
       </>

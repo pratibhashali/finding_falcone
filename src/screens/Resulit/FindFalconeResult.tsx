@@ -18,7 +18,7 @@ const FindFalconeResult = ({ navigation }) => {
     fixedCacheKey: 'shared-find-falcone',
   });
 
-  const { timeTaken } = useSelector((state: RootState) => state.findFalcone);
+  const { timeTaken4 } = useSelector((state: RootState) => state.findFalcone);
   const { Layout, Gutters } = useTheme();
 
   const onReset = () => navigation.navigate(Routes.WELCOME);
@@ -30,7 +30,7 @@ const FindFalconeResult = ({ navigation }) => {
         pleased. {'\n\n\n'}Planet found: {data?.planet_name}
       </Text>
       <View style={[Gutters.smallTMargin]}>
-        <TimeTaken timeTaken={timeTaken} />
+        <TimeTaken timeTaken={timeTaken4} />
       </View>
       <TouchableOpacity style={styles.tryMoreButton} onPress={onReset}>
         <Text style={styles.tryMoreText}>Play again</Text>
@@ -47,7 +47,7 @@ const FindFalconeResult = ({ navigation }) => {
             one more attempt
           </Text>
           <View style={[Gutters.smallTMargin]}>
-            <TimeTaken timeTaken={timeTaken} />
+            <TimeTaken timeTaken={timeTaken4} />
           </View>
           <TouchableOpacity style={styles.tryMoreButton} onPress={onReset}>
             <Text style={styles.tryMoreText}>Try one more time</Text>
