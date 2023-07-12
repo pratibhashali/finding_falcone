@@ -1,9 +1,9 @@
 import common from './common.json';
-import example from './example.json';
 import welcome from './welcome.json';
+import findFalcone from './findFalcone.json';
 
 export default {
   common,
-  example,
   welcome,
+  findFalcone,
 };

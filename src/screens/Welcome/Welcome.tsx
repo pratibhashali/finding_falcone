@@ -6,7 +6,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { resetFindFalcone } from 'finding_falcone_app/src/store/findFalcone';
 import { Routes } from 'finding_falcone_app/src/navigators/Routes';
+import { useTranslation } from 'react-i18next';
 const Welcome = ({ navigation }) => {
+  const { t } = useTranslation(['welcome']);
   const { Layout } = useTheme();
   const dispatch = useDispatch();
   const onStartPress = () => {
@@ -26,9 +28,7 @@ const Welcome = ({ navigation }) => {
         />
         <View style={styles.buttonView}>
           <TouchableOpacity style={styles.findButton} onPress={onStartPress}>
-            <Text style={styles.buttonText}>
-              Help King Shan find Al Falcone.
-            </Text>
+            <Text style={styles.buttonText}>{t('welcome:title')}</Text>
           </TouchableOpacity>
         </View>
       </View>

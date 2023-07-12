@@ -12,11 +12,13 @@ import { RootState } from 'finding_falcone_app/src/store';
 import TimeTaken from 'finding_falcone_app/src/components/Time/TimeTaken';
 import { useTheme } from 'finding_falcone_app/src/hooks';
 import { Routes } from 'finding_falcone_app/src/navigators/Routes';
+import { useTranslation } from 'react-i18next';
 
 const FindFalconeResult = ({ navigation }) => {
   const [, { data, isLoading }] = useFindMutation({
     fixedCacheKey: 'shared-find-falcone',
   });
+  const { t } = useTranslation(['findFalcone', 'common']);
 
   const { timeTaken4 } = useSelector((state: RootState) => state.findFalcone);
   const { Layout, Gutters } = useTheme();
@@ -25,15 +27,18 @@ const FindFalconeResult = ({ navigation }) => {
 
   const successView = () => (
     <>
+      <Text style={styles.textCenter}>{t('findFalcone:result.success')}</Text>
       <Text style={styles.textCenter}>
-        Success! Congratulations on Finding Falcone King Shan is mightily
-        pleased. {'\n\n\n'}Planet found: {data?.planet_name}
+        {'\n\n\n'}
+        {t('findFalcone:result.planetFound')} {data?.planet_name}
       </Text>
       <View style={[Gutters.smallTMargin]}>
         <TimeTaken timeTaken={timeTaken4} />
       </View>
       <TouchableOpacity style={styles.tryMoreButton} onPress={onReset}>
-        <Text style={styles.tryMoreText}>Play again</Text>
+        <Text style={styles.tryMoreText}>
+          {t('findFalcone:result.playAgain')}
+        </Text>
       </TouchableOpacity>
     </>
   );
@@ -43,14 +48,15 @@ const FindFalconeResult = ({ navigation }) => {
       return (
         <>
           <Text style={styles.textCenter}>
-            Failure! On Finding Falcone King Shan is not pleased and gives you
-            one more attempt
+            {t('findFalcone:result.failed')}
           </Text>
           <View style={[Gutters.smallTMargin]}>
             <TimeTaken timeTaken={timeTaken4} />
           </View>
           <TouchableOpacity style={styles.tryMoreButton} onPress={onReset}>
-            <Text style={styles.tryMoreText}>Try one more time</Text>
+            <Text style={styles.tryMoreText}>
+              {t('findFalcone:result.oneMoreTime')}
+            </Text>
           </TouchableOpacity>
         </>
       );

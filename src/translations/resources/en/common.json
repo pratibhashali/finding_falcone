@@ -2,5 +2,12 @@
   "appName": {
     "full": "React Native finding_falcone_app",
     "initials": "RNB"
-  }
+  },
+  "planet": "Planet",
+  "timeTaken": "Time taken:",
+  "reset": "Reset",
+  "selectNextPlanet": "Select next planet",
+  "geekTrust": "GeekTrust",
+  "selectVehicle": " Select the space vehicle you want to use:",
+  "find": "Find Al Falcone"
 }

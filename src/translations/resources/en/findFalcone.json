@@ -1,0 +1,25 @@
+{
+    "planetOne": {
+        "select": "Select the first planet you want to search in:",
+        "dropdownPlaceHolder": "Select planet one",
+    },
+    "planetTwo": {
+        "select": "Select the second planet you want to search in:",
+        "dropdownPlaceHolder": "Select planet two"
+    },
+    "planetThree": {
+        "select": "Select the third planet you want to search in:",
+        "dropdownPlaceHolder": "Select planet three"
+    },
+    "planetFour": {
+        "select": "Select the fourth planet you want to search in:",
+        "dropdownPlaceHolder": "Select planet four"
+    },
+    "result": {
+        "success": "Success! Congratulations on Finding Falcone King Shan is mightily pleased.",
+        "planetFound": "Planet found:",
+        "failed": "Failure! On Finding Falcone King Shan is not pleased and gives you one more attempt",
+        "oneMoreTime": "Try one more time",
+        "playAgain": "Play again"
+    }
+}

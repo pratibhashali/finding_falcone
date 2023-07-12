@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   View,
   Text,
@@ -26,6 +27,7 @@ const Buttons: FC<ButtonsProps> = ({
   onReset,
   containerStyle,
 }) => {
+  const { t } = useTranslation(['common']);
   return (
     <View style={[styles.container, containerStyle]}>
       <TimeTaken timeTaken={timeTaken} />
@@ -34,7 +36,7 @@ const Buttons: FC<ButtonsProps> = ({
           style={[styles.button, styles.resetButton]}
           onPress={onReset}
         >
-          <Text style={styles.buttonText}>Reset</Text>
+          <Text style={styles.buttonText}>{t('common:reset')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[

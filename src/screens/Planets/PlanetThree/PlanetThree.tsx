@@ -16,8 +16,10 @@ import {
 import { useTheme } from 'finding_falcone_app/src/hooks';
 import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndButton';
 import { Routes } from 'finding_falcone_app/src/navigators/Routes';
+import { useTranslation } from 'react-i18next';
 
 const PlanetThree = ({ navigation }) => {
+  const { t } = useTranslation(['findFalcone', 'common']);
   const { Layout, Gutters } = useTheme();
   const { data: vehicleData } = useFetchVehicleQuery({});
   const dispatch = useDispatch();
@@ -48,21 +50,21 @@ const PlanetThree = ({ navigation }) => {
   return (
     <View style={[Layout.fill, Gutters.smallPadding, styles.viewBg]}>
       <Text style={[Gutters.smallVMargin]}>
-        Select the third planet you want to search in:
+        {t('findFalcone:planetThree.select')}
       </Text>
       <>
         <DropdownComponent
           data={selectPlanetThreeDropDownData!}
           onChange={onDestination3Selected}
-          label="Planet"
-          placeholder="Select third planet"
+          label={t('common:planet')}
+          placeholder={t('findFalcone:planetThree.dropdownPlaceHolder')}
           value={planet3}
           disabled={false}
         />
         {planet3 && (
           <>
             <Text style={[Gutters.largeTMargin]}>
-              Select the space vehicle you want to use:
+              {t('common:selectVehicle')}
             </Text>
             <RadioButton
               vehicleCountMapper={vehicleCountMapper3}
@@ -79,7 +81,7 @@ const PlanetThree = ({ navigation }) => {
           onReset={onReset}
           onSubmit={onNext}
           timeTaken={timeTaken3}
-          buttonText="Select next planet"
+          buttonText={t('common:selectNextPlanet')}
         />
       </>
     </View>

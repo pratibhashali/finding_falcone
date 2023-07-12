@@ -18,8 +18,10 @@ import { useTheme } from 'finding_falcone_app/src/hooks';
 import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndButton';
 import { useFetchTokenMutation } from 'finding_falcone_app/src/services/modules/token';
 import { Routes } from 'finding_falcone_app/src/navigators/Routes';
+import { useTranslation } from 'react-i18next';
 
 const PlanetFour = ({ navigation }) => {
+  const { t } = useTranslation(['findFalcone', 'common']);
   const { Layout, Gutters } = useTheme();
   const [fetchToken, {}] = useFetchTokenMutation({});
   const [find, {}] = useFindMutation({
@@ -80,14 +82,14 @@ const PlanetFour = ({ navigation }) => {
   return (
     <View style={[Layout.fill, Gutters.smallPadding, styles.root]}>
       <Text style={[Gutters.smallVMargin]}>
-        Select the fourth planet you want to search in:
+        {t('findFalcone:planetFour.select')}
       </Text>
       <>
         <DropdownComponent
           data={selectPlanetFourDropDownData!}
           onChange={onDestination4Selected}
-          label="Planet"
-          placeholder="Select fourth planet"
+          label={t('common:planet')}
+          placeholder={t('findFalcone:planetFour.dropdownPlaceHolder')}
           value={planet4}
           disabled={false}
         />
@@ -110,7 +112,7 @@ const PlanetFour = ({ navigation }) => {
           onReset={onReset}
           onSubmit={onSubmit}
           timeTaken={timeTaken4}
-          buttonText="Find Al Falcone"
+          buttonText={t('common:find')}
         />
       </>
     </View>
