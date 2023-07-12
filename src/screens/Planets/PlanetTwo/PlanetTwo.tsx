@@ -17,6 +17,7 @@ import { useTheme } from 'finding_falcone_app/src/hooks';
 import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndButton';
 import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 import { useTranslation } from 'react-i18next';
+import Link from 'finding_falcone_app/src/components/Link/Link';
 
 const PlanetTwo = ({ navigation }) => {
   const { Layout, Gutters } = useTheme();
@@ -81,6 +82,10 @@ const PlanetTwo = ({ navigation }) => {
           onSubmit={onNext}
           timeTaken={timeTaken2}
           buttonText={t('common:selectNextPlanet')}
+        />
+        <Link
+          text={t('common:footerText')}
+          url="https://www.geektrust.in/finding-falcone"
         />
       </>
     </View>

@@ -19,6 +19,7 @@ import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndBut
 import { useFetchTokenMutation } from 'finding_falcone_app/src/services/modules/token';
 import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 import { useTranslation } from 'react-i18next';
+import Link from 'finding_falcone_app/src/components/Link/Link';
 
 const PlanetFour = ({ navigation }) => {
   const { t } = useTranslation(['findFalcone', 'common']);
@@ -113,6 +114,10 @@ const PlanetFour = ({ navigation }) => {
           onSubmit={onSubmit}
           timeTaken={timeTaken4}
           buttonText={t('common:find')}
+        />
+        <Link
+          text={t('common:footerText')}
+          url="https://www.geektrust.in/finding-falcone"
         />
       </>
     </View>

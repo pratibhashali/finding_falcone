@@ -23,6 +23,7 @@ import { RootState } from 'finding_falcone_app/src/store';
 import TimeAndButton from 'finding_falcone_app/src/components/Buttons/TimeAndButton';
 import { Routes } from 'finding_falcone_app/src/navigators/Routes';
 import { useTranslation } from 'react-i18next';
+import Link from 'finding_falcone_app/src/components/Link/Link';
 // import { useAppDispatch } from 'finding_falcone_app/src/store';
 
 const Example = ({ navigation }) => {
@@ -103,6 +104,10 @@ const Example = ({ navigation }) => {
               onSubmit={onNext}
               timeTaken={timeTaken1}
               buttonText={t('common:selectNextPlanet')}
+            />
+            <Link
+              text={t('common:footerText')}
+              url="https://www.geektrust.in/finding-falcone"
             />
           </>
         ) : (
