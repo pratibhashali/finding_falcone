@@ -1,7 +1,7 @@
 {
     "planetOne": {
         "select": "Select the first planet you want to search in:",
-        "dropdownPlaceHolder": "Select planet one",
+        "dropdownPlaceHolder": "Select planet one"
     },
     "planetTwo": {
         "select": "Select the second planet you want to search in:",
