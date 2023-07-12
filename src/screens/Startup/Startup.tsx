@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../../hooks';
-import { Brand } from '../../components';
-import { setDefaultTheme } from '../../store/theme';
 import { ApplicationScreenProps } from '../../../@types/navigation';
 import { useFetchPlanetQuery } from 'finding_falcone_app/src/services/modules/planets';
 import { useFetchVehicleQuery } from 'finding_falcone_app/src/services/modules/vehicles';
@@ -10,19 +8,11 @@ import Lottie from 'lottie-react-native';
 import { useDispatch } from 'react-redux';
 import { selectPlanetOneDropDownData } from 'finding_falcone_app/src/store/findFalcone';
 const Startup = ({ navigation }: ApplicationScreenProps) => {
-  const { Layout, Gutters } = useTheme();
+  const { Layout } = useTheme();
 
-  const {
-    data: planetData,
-    error: planetsError,
-    isLoading: planetsLoading,
-  } = useFetchPlanetQuery({});
+  const { data: planetData } = useFetchPlanetQuery({});
 
-  const {
-    data: vehicleData,
-    error: vehiclesError,
-    isLoading: vehiclesLoading,
-  } = useFetchVehicleQuery({});
+  const { data: vehicleData } = useFetchVehicleQuery({});
 
   const dispatch = useDispatch();
 

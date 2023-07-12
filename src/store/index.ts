@@ -16,7 +16,6 @@ import { MMKV } from 'react-native-mmkv';
 import { api } from '../services/api';
 import theme from './theme';
 import findFalcone from './findFalcone';
-import { useDispatch } from 'react-redux';
 
 const reducers = combineReducers({
   theme,

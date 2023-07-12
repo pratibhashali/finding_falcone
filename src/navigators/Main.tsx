@@ -1,22 +1,15 @@
 import React from 'react';
-import { Linking, Text } from 'react-native';
 import { PlanetFour, PlanetOne, PlanetThree, PlanetTwo } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import Welcome from '../screens/Welcome/Welcome';
 import FindFalconeResult from '../screens/Resulit/FindFalconeResult';
 import { Routes } from './Routes';
+import Link from '../components/Link/Link';
 
 const Stack = createStackNavigator();
-
 const headerRight = () => (
-  <Text
-    style={{ paddingEnd: 5 }}
-    onPress={() => Linking.openURL('https://www.geektrust.com/')}
-  >
-    GeekTrust
-  </Text>
+  <Link url="https://www.geektrust.com/" text="GeekTrust" />
 );
-
 const MainNavigator = () => {
   return (
     <Stack.Navigator

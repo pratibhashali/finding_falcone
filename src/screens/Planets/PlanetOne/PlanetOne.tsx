@@ -1,33 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   ActivityIndicator,
   Text,
   ScrollView,
   StyleSheet,
-  Button,
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../hooks';
-import {
-  Planet,
-  useFetchPlanetQuery,
-} from 'finding_falcone_app/src/services/modules/planets';
-import { Dropdown } from 'react-native-element-dropdown';
+import { Planet } from 'finding_falcone_app/src/services/modules/planets';
 import {
   useFetchVehicleQuery,
   Vehicle,
 } from 'finding_falcone_app/src/services/modules/vehicles';
 import DropdownComponent from 'finding_falcone_app/src/components/Dropdown/Dropdown';
-import RadioButton, {
-  RadioButtonOption,
-} from 'finding_falcone_app/src/components/RadioButton/RadioButton';
-import { useFetchTokenMutation } from 'finding_falcone_app/src/services/modules/token';
-import { useFindMutation } from 'finding_falcone_app/src/services/modules/find';
+import RadioButton from 'finding_falcone_app/src/components/RadioButton/RadioButton';
 import {
   planet1Selected,
   vehicle1Selected,
-  setToken,
 } from 'finding_falcone_app/src/store/findFalcone';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'finding_falcone_app/src/store';

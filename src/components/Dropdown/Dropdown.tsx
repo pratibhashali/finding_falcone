@@ -1,6 +1,4 @@
-import { useTheme } from 'finding_falcone_app/src/hooks';
 import { Planet } from 'finding_falcone_app/src/services/modules/planets';
-import { Colors } from 'finding_falcone_app/src/theme/themes/default_dark/Variables';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -20,9 +18,9 @@ const DropdownComponent: React.FC<DropdownComponentProps> = React.memo(
 
     return (
       <View style={styles.container}>
-        <Text style={[isFocus && { color: 'blue' }]}>{label}</Text>
+        <Text style={[isFocus && styles.colorBlue]}>{label}</Text>
         <Dropdown
-          style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+          style={[styles.dropdown, isFocus && styles.borderBlue]}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           inputSearchStyle={styles.inputSearchStyle}
@@ -49,6 +47,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#EFEFEF',
   },
+  colorBlue: { color: 'blue' },
+  borderBlue: { borderColor: 'blue' },
   dropdown: {
     height: 50,
     borderColor: 'gray',

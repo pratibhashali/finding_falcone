@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React, { useCallback } from 'react';
 import DropdownComponent from 'finding_falcone_app/src/components/Dropdown/Dropdown';
 import RadioButton from 'finding_falcone_app/src/components/RadioButton/RadioButton';

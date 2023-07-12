@@ -36,7 +36,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
           <View
             style={[
               styles.rootView,
-              { borderColor: selectedOption === option ? 'blue' : 'gray' },
+              selectedOption === option ? styles.borderBlue : styles.borderBlue,
             ]}
           >
             {selectedOption?.name === option.name && (
@@ -46,11 +46,9 @@ const RadioButton: React.FC<RadioButtonProps> = ({
           <Text
             style={[
               styles.spaceLeft,
-              {
-                color: !checkEligibility(selectedPlanet, option)
-                  ? 'black'
-                  : 'grey',
-              },
+              !checkEligibility(selectedPlanet, option)
+                ? styles.colorBlack
+                : styles.colorGrey,
             ]}
           >
             {option.name}
@@ -84,4 +82,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
   },
   spaceLeft: { marginLeft: 10 },
+  borderBlue: { borderColor: 'blue' },
+  borderGrey: { borderColor: 'gray' },
+  colorBlack: { borderColor: 'black' },
+  colorGrey: { borderColor: 'gray' },
 });
